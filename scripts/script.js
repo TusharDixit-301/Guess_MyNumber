@@ -1,5 +1,7 @@
 'use strict';
 
+//? Confetti animation Begins {
+
 var maxParticleCount = 150; //set max confetti count
 var particleSpeed = 2; //set the particle animation speed
 var startConfetti; //call to start confetti animation
@@ -149,40 +151,59 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
     }
   }
 })();
-//!
+//? } Confetti Animation Ended
 
+//! Random Number Generator
+const randomNumber = function () {
+  return Math.trunc(Math.random() * 20) + 1;
+};
+
+//! Display Message
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
+//* Animation Logic Begins {
+
+//! Winning Animation
 const winningAnimation = function () {
   const audio = new Audio('/assests/Sounds/Win.mp3');
   audio.play();
   startConfetti();
 };
-const displayMessage = function (message) {
-  document.querySelector('.message').textContent = message;
-};
 
+//! Error Audio Play
 const playErrorBGM = function () {
   const audio = new Audio('/assests/Sounds/wrong.mp3');
   audio.play();
 };
 
-const randomNumber = function () {
-  return Math.trunc(Math.random() * 20) + 1;
-};
-
+//! Shaking Animation CSS Added
 const animationShake = function () {
   document.querySelector('body').classList.add('animate');
 };
 
+//! Shaking Animation Generator
 const generateAnimation = function () {
   animationShake();
   playErrorBGM();
   const myInterval = setTimeout(clearAnimation, 400);
 };
 
+//! Clear Animation Function
 const clearAnimation = function () {
   document.querySelector('body').classList.remove('animate');
 };
+//* Animation Logic Ended
 
+//! Lose Animation Generator
+const loseAnimation = function () {
+  const audio = new Audio('assests/Sounds/lose.mp3');
+  animationShake();
+  audio.play();
+};
+
+//! Logic Begins Here
 let secretNumber = randomNumber();
 let score = 5;
 let highscore = 0;
@@ -220,10 +241,12 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('body').style.backgroundColor = '#EB1D36';
       document.querySelector('.number').textContent = secretNumber;
       document.querySelector('.score').textContent = 0;
+      loseAnimation();
     }
   }
 });
 
+//! Again Button Reset The Game
 document.querySelector('.again').addEventListener('click', function () {
   score = 5;
   secretNumber = randomNumber();
@@ -236,5 +259,3 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('body').style.backgroundColor = '#4e6e81';
   document.querySelector('.number').style.width = '15rem';
 });
-
-//!
