@@ -167,14 +167,14 @@ const displayMessage = function (message) {
 
 //! Winning Animation
 const winningAnimation = function () {
-  const audio = new Audio('/assests/Sounds/Win.mp3');
+  const audio = new Audio('assests/Sounds/Win.mp3');
   audio.play();
   startConfetti();
 };
 
 //! Error Audio Play
 const playErrorBGM = function () {
-  const audio = new Audio('/assests/Sounds/wrong.mp3');
+  const audio = new Audio('assests/Sounds/wrong.mp3');
   audio.play();
 };
 
